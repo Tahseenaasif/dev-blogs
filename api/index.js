@@ -6,7 +6,7 @@ import userRoutes from "./routes/user.routes.js"
 import authRouter from "./routes/auth.routes.js"
 import cookieParser from 'cookie-parser';
 dotenv.config()
-
+import postRoute from  './routes/post.route.js'
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,6 +29,7 @@ app.listen(3000, () => {
 
 app.use('/api/user',userRoutes)
 app.use('/api/auth',authRouter)
+app.use('/api/post',postRoute)
 
 
 app.use((err,req,res,next)=>{

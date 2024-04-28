@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+   height:100vh;
+
+}
+
+.ql-editor{
+    font-size: 1.05rem;
+}
+
 /* @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities'; */

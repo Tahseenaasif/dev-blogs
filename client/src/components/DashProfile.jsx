@@ -17,7 +17,7 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-//   signoutSuccess,
+  signoutSuccess,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -36,6 +36,7 @@ export default function DashProfile() {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
+  console.log("this is current user ",typeof(Boolean(currentuser.isAdmin)))
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -50,7 +51,7 @@ export default function DashProfile() {
   }, [imageFile]);
 
   const uploadImage = async () => {
-   
+
     setImageFileUploading(true);
     setImageFileUploadError(null);
     const storage = getStorage(app);
@@ -141,42 +142,22 @@ export default function DashProfile() {
     }
   };
 
-//   const handleSignout = async () => {
-//     try {
-//       const res = await fetch('/api/user/signout', {
-//         method: 'POST',
-//       });
-//       const data = await res.json();
-//       if (!res.ok) {
-//         console.log(data.message);
-//       } else {
-//         dispatch(signoutSuccess());
-//       }
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-const handleSignout=async(e)=>{
-console.log("this methos is implements")
-}
-// const handleDeleteUser=async(e)=>{
-//   setShowModal(false);
-//   try{
-//     dispatch(deleteUserStart())
-//     const res=await fetch(`api/user/delete/${currentuser._id}`,{
-//       method:'DELETE',
-//     });
-//     const data=await res.json();
-//     if(res.ok){
-//       dispatch(deleteUserSuccess(data.message))
-//     }else{
-//       dispatch(deleteUserFailure(data.message))
-//     }
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-//   }catch(error){
-//      dispatch(deleteUserFailure(error.message))
-//   }
-// }
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
@@ -192,7 +173,7 @@ console.log("this methos is implements")
           className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
           onClick={() => filePickerRef.current.click()}
         >
-          {(imageFileUploadProgress && imageFileUploadProgress<100) && (
+          {(imageFileUploadProgress && imageFileUploadProgress < 100) && (
             <CircularProgressbar
               value={imageFileUploadProgress || 0}
               text={`${imageFileUploadProgress}%`}
@@ -206,9 +187,8 @@ console.log("this methos is implements")
                   left: 0,
                 },
                 path: {
-                  stroke: `rgba(62, 152, 199, ${
-                    imageFileUploadProgress / 100
-                  })`,
+                  stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100
+                    })`,
                 },
               }}
             />
@@ -216,11 +196,10 @@ console.log("this methos is implements")
           <img
             src={imageFileUrl || currentuser.profilePicture}
             alt='user'
-            className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
-              imageFileUploadProgress &&
+            className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress &&
               imageFileUploadProgress < 100 &&
               'opacity-60'
-            }`}
+              }`}
           />
         </div>
         {imageFileUploadError && (
@@ -254,7 +233,8 @@ console.log("this methos is implements")
         >
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        {currentuser.isAdmin && (
+    
+        {currentuser.isAdmin=='true' && (
           <Link to={'/create-post'}>
             <Button
               type='button'

@@ -47,6 +47,11 @@ const initialState={
             state.loading = false;
             state.error = action.payload;
           },
+          signoutSuccess:(state,action)=>{
+            state.currentuser = null;
+            state.loading = false;
+            state.error = null;
+          }
 
     }
 })
@@ -61,7 +66,8 @@ export const {
     updateFailure,
     deleteUserStart,
     deleteUserFailure,
-    deleteUserSuccess
+    deleteUserSuccess,
+    signoutSuccess
 
 } =userSlice.actions;
 export default userSlice.reducer;
