@@ -11,7 +11,6 @@ export default function DashSidebar() {
     const dispatch = useDispatch();
     const [tab, seTab] = useState('');
     const { currentuser } = useSelector((state) => state.user);
-    console.log("current User in dash side bar", currentuser)
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const tabformUrl = urlParams.get('tab');
