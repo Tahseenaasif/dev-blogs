@@ -7,6 +7,8 @@ import authRouter from "./routes/auth.routes.js"
 import cookieParser from 'cookie-parser';
 dotenv.config()
 import postRoute from  './routes/post.route.js'
+import commentRoutes from  './routes/comment.route.js'
+
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -30,7 +32,7 @@ app.listen(3000, () => {
 app.use('/api/user',userRoutes)
 app.use('/api/auth',authRouter)
 app.use('/api/post',postRoute)
-
+app.use('/api/comment', commentRoutes);
 
 app.use((err,req,res,next)=>{
    const statusCode=err.statusCode || 500;
