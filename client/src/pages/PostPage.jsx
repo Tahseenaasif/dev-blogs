@@ -68,7 +68,7 @@ export default function PostPage() {
             <div className="max-w-4xl mx-auto w-full">
             <CallTOAction/>
             </div>
-            <CommentSection postid={post._id}/>
+            <CommentSection postId={post._id}/>
         </main>
     )
 
