@@ -5,7 +5,8 @@ import {
     updateUser,
     signoutUser,
     getUsers,
-    deleteUser
+    deleteUser,
+    getUser
 } from "../controllers/user.controller.js"
 
 
@@ -15,6 +16,7 @@ router.post('/signout',signoutUser);
 router.put('/update/:userId',verifyToken,updateUser);
 router.delete('/delete/:userId',verifyToken,deleteUser);
 router.get('/getusers',verifyToken,getUsers)
+router.get('/:userId',verifyToken,getUser)
 
 
 export default router;
