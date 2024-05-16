@@ -6,6 +6,7 @@ import DashProfile from "../components/DashProfile"
 import DashPosts from '../components/DashPosts';
 import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
+import DasboardComponent from '../components/DasboardComponent'
 export default function Dashboard() {
   const location = useLocation();
   const [tab, seTab] = useState('');
@@ -30,6 +31,7 @@ export default function Dashboard() {
         {tab === 'posts' && <DashPosts />}
         {tab==='users' && <DashUsers/>}
         {tab=='comments' && <DashComments/>}
+        {tab=='dash' && <DasboardComponent/>}
       </div>
 
     </div>
