@@ -1,39 +1,39 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import DashSidebar from "../components/DashSidebar";
-import DashProfile from "../components/DashProfile"
+//import DasboardComponent from '../components/DasboardComponent'
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import DashSidebar from '../components/DashSidebar';
+import DashProfile from '../components/DashProfile';
 import DashPosts from '../components/DashPosts';
 import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
-import DasboardComponent from '../components/DasboardComponent'
+import DasboardComponent from '../components/DasboardComponent';
+
 export default function Dashboard() {
   const location = useLocation();
-  const [tab, seTab] = useState('');
+  const [tab, setTab] = useState('');
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const tabformUrl = urlParams.get('tab');
-
-    if (tabformUrl) {
-      seTab(tabformUrl)
+    const tabFromUrl = urlParams.get('tab');
+    if (tabFromUrl) {
+      setTab(tabFromUrl);
     }
-  }, [location])
+  }, [location.search]);
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      <div className="">
-        {/* sidebar */}
+    <div className='min-h-screen flex flex-col md:flex-row'>
+      <div className='md:w-56'>
+        {/* Sidebar */}
         <DashSidebar />
       </div>
-      {/* profile ..... */}
-      <div>
-        {tab === 'profile' && <DashProfile />
-        }
-        {tab === 'posts' && <DashPosts />}
-        {tab==='users' && <DashUsers/>}
-        {tab=='comments' && <DashComments/>}
-        {tab=='dash' && <DasboardComponent/>}
-      </div>
-
+      {/* profile... */}
+      {tab === 'profile' && <DashProfile />}
+      {/* posts... */}
+      {tab === 'posts' && <DashPosts />}
+      {/* users */}
+      {tab === 'users' && <DashUsers />}
+      {/* comments  */}
+      {tab === 'comments' && <DashComments />}
+      {/* dashboard comp */}
+      {tab === 'dash' && <DasboardComponent />}
     </div>
-  )
+  );
 }
